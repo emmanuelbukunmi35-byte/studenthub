@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>StudentHub Progress</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #f2f4f8;
+            margin: 0;
+            padding: 20px;
+        }
+
+        .box {
+            max-width: 700px;
+            margin: auto;
+            background: white;
+            padding: 25px;
+            border-radius: 15px;
+            box-shadow: 0 3px 12px rgba(0,0,0,0.12);
+        }
+
+        h1 {
+            text-align: center;
+        }
+
+        .subject {
+            padding: 15px;
+            margin: 12px 0;
+            background: #eef2ff;
+            border-radius: 10px;
+            font-size: 18px;
+        }
+
+        .score {
+            float: right;
+            font-weight: bold;
+        }
+
+        .total {
+            margin-top: 25px;
+            padding: 18px;
+            background: #e5e7eb;
+            border-radius: 10px;
+            text-align: center;
+            font-size: 20px;
+            font-weight: bold;
+        }
+
+        a {
+            display: block;
+            text-align: center;
+            margin-top: 25px;
+            text-decoration: none;
+            font-weight: bold;
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="box">
+
+    <h1>📊 My Progress</h1>
+
+    <div class="subject">
+        Physics
+        <span class="score" id="Physics">Not taken</span>
+    </div>
+
+    <div class="subject">
+        Mathematics
+        <span class="score" id="Mathematics">Not taken</span>
+    </div>
+
+    <div class="subject">
+        Chemistry
+        <span class="score" id="Chemistry">Not taken</span>
+    </div>
+
+    <div class="subject">
+        Biology
+        <span class="score" id="Biology">Not taken</span>
+    </div>
+
+    <div class="subject">
+        English
+        <span class="score" id="English">Not taken</span>
+    </div>
+
+    <div class="subject">
+        Computer Science
+        <span class="score" id="Computer Science">Not taken</span>
+    </div>
+
+    <div class="total" id="overall">
+        Overall: No quizzes completed
+    </div>
+
+    <a href="/">⬅️ Back to StudentHub</a>
+
+</div>
+
+<script>
+
+const subjects = [
+    "Physics",
+    "Mathematics",
+    "Chemistry",
+    "Biology",
+    "English",
+    "Computer Science"
+];
+
+let totalScore = 0;
+let completed = 0;
+
+subjects.forEach(function(subject) {
+
+    const savedScore = localStorage.getItem(
+        "studenthub_" + subject + "_score"
+    );
+
+    if (savedScore !== null) {
+
+        document.getElementById(subject).textContent =
+            savedScore + "/60";
+
+        totalScore += Number(savedScore);
+        completed++;
+
+    }
+
+});
+
+if (completed > 0) {
+
+    const percentage =
+        Math.round((totalScore / (completed * 60)) * 100);
+
+    document.getElementById("overall").textContent =
+        "Overall: " +
+        totalScore +
+        "/" +
+        (completed * 60) +
+        " (" +
+        percentage +
+        "%)";
+
+} else {
+
+    document.getElementById("overall").textContent =
+        "Overall: No quizzes completed";
+
+}
+
+</script>
+
+</body>
+</html>

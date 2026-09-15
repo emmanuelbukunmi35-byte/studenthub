@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Study Timer</title>
+<style>
+body{font-family:Arial;text-align:center;background:#f4f7fb;padding:30px}
+.box{background:white;max-width:500px;margin:auto;padding:30px;border-radius:20px}
+#clock{font-size:60px;margin:30px}
+button{padding:12px;margin:5px;border:0;border-radius:8px;background:#2563eb;color:white}
+</style>
+</head>
+<body>
+<div class="box">
+<h1>⏱️ Study Timer</h1>
+<div id="clock">25:00</div>
+<button onclick="start()">Start</button>
+<button onclick="pause()">Pause</button>
+<button onclick="reset()">Reset</button>
+<p><a href="/">⬅ Back to StudentHub</a></p>
+</div>
+
+<script>
+let seconds=1500;
+let run;
+
+function display(){
+    let m=Math.floor(seconds/60);
+    let s=seconds%60;
+    document.getElementById("clock").innerText=
+    `${m}:${String(s).padStart(2,"0")}`;
+}
+
+function start(){
+    clearInterval(run);
+    run=setInterval(()=>{
+        if(seconds>0){
+            seconds--;
+            display();
+        }else{
+            clearInterval(run);
+            alert("Study session complete! 🎉");
+        }
+    },1000);
+}
+
+function pause(){
+    clearInterval(run);
+}
+
+function reset(){
+    clearInterval(run);
+    seconds=1500;
+    display();
+}
+</script>
+</body>
+</html>

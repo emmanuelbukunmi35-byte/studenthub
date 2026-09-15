@@ -1,0 +1,10 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="viewport" content="width=device-width,initial-scale=1"><title>Notes</title>
+<style>body{font-family:Arial;background:#f4f7fb;padding:20px}.box{max-width:700px;margin:auto;background:white;padding:20px;border-radius:15px}textarea{width:100%;height:300px;padding:10px;box-sizing:border-box}button{padding:12px;background:#2563eb;color:white;border:0;border-radius:8px}</style>
+</head>
+<body><div class="box"><h1>📚 My Notes</h1><textarea id="notes" placeholder="Write your study notes here..."></textarea><br><br><button onclick="save()">Save Notes</button><p id="status"></p><a href="/">⬅ Back</a></div>
+<script>
+document.getElementById("notes").value=localStorage.getItem("studentNotes")||"";
+function save(){localStorage.setItem("studentNotes",document.getElementById("notes").value);document.getElementById("status").innerText="✅ Notes saved!";}
+</script></body></html>

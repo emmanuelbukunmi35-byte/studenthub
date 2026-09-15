@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>StudentHub Login</title>
+
+<style>
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    min-height: 100vh;
+    font-family: Arial, sans-serif;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(
+        135deg,
+        #4f46e5,
+        #9333ea,
+        #ec4899,
+        #f97316,
+        #eab308
+    );
+    background-size: 400% 400%;
+    animation: backgroundMove 10s ease infinite;
+}
+
+@keyframes backgroundMove {
+    0% {
+        background-position: 0% 50%;
+    }
+    50% {
+        background-position: 100% 50%;
+    }
+    100% {
+        background-position: 0% 50%;
+    }
+}
+
+.login-box {
+    width: 90%;
+    max-width: 400px;
+    padding: 35px 25px;
+    background: rgba(255, 255, 255, 0.95);
+    border-radius: 25px;
+    box-shadow: 0 15px 40px rgba(0,0,0,0.25);
+    text-align: center;
+}
+
+.logo {
+    width: 75px;
+    height: 75px;
+    margin: auto;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 35px;
+    font-weight: bold;
+    color: white;
+    background: linear-gradient(
+        135deg,
+        #2563eb,
+        #9333ea,
+        #ec4899
+    );
+}
+
+h1 {
+    margin-bottom: 5px;
+    color: #1e293b;
+}
+
+.subtitle {
+    color: #64748b;
+    margin-bottom: 25px;
+}
+
+.input-box {
+    text-align: left;
+    margin-bottom: 15px;
+}
+
+label {
+    display: block;
+    margin-bottom: 7px;
+    font-weight: bold;
+    color: #334155;
+}
+
+input {
+    width: 100%;
+    padding: 14px;
+    border: 2px solid #e2e8f0;
+    border-radius: 12px;
+    font-size: 16px;
+    outline: none;
+    transition: 0.3s;
+}
+
+input:focus {
+    border-color: #8b5cf6;
+    box-shadow: 0 0 8px rgba(139,92,246,0.3);
+}
+
+button {
+    width: 100%;
+    padding: 14px;
+    margin-top: 10px;
+    border: none;
+    border-radius: 12px;
+    color: white;
+    font-size: 17px;
+    font-weight: bold;
+    cursor: pointer;
+    background: linear-gradient(
+        90deg,
+        #2563eb,
+        #7c3aed,
+        #db2777
+    );
+    background-size: 200% 100%;
+    transition: 0.4s;
+}
+
+button:hover {
+    background-position: 100% 0;
+    transform: translateY(-2px);
+}
+
+.message {
+    margin-top: 15px;
+    font-weight: bold;
+}
+
+.footer {
+    margin-top: 25px;
+    color: #64748b;
+    font-size: 13px;
+}
+</style>
+</head>
+
+<body>
+
+<div class="login-box">
+
+    <div class="logo">S</div>
+
+    <h1>StudentHub</h1>
+
+    <p class="subtitle">Welcome back, student!</p>
+
+    <form onsubmit="login(event)">
+
+        <div class="input-box">
+            <label>Username</label>
+            <input
+                type="text"
+                id="username"
+                placeholder="Enter your username"
+                required
+            >
+        </div>
+
+        <div class="input-box">
+            <label>Password</label>
+            <input
+                type="password"
+                id="password"
+                placeholder="Enter your password"
+                required
+            >
+        </div>
+
+        <button type="submit">
+            Login
+        </button>
+
+    </form>
+
+    <div id="message" class="message"></div>
+
+    <div class="footer">
+        Learn • Practice • Improve
+    </div>
+
+</div>
+
+<script>
+function login(event) {
+
+    event.preventDefault();
+
+    const username = document.getElementById("username").value.trim();
+    const password = document.getElementById("password").value;
+
+    const message = document.getElementById("message");
+
+    if (username.length < 3) {
+        message.style.color = "#dc2626";
+        message.textContent = "Username must be at least 3 characters.";
+        return;
+    }
+
+    if (password.length < 4) {
+        message.style.color = "#dc2626";
+        message.textContent = "Password must be at least 4 characters.";
+        return;
+    }
+
+    localStorage.setItem("studenthub_user", username);
+    localStorage.setItem("studenthub_logged_in", "true");
+
+    message.style.color = "#16a34a";
+    message.textContent = "Login successful!";
+
+    setTimeout(() => {
+        window.location.href = "/";
+    }, 700);
+}
+</script>
+
+</body>
+</html>
